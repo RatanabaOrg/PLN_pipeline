@@ -1,6 +1,6 @@
 import re
 from bs4 import BeautifulSoup
-from web_scrapping import scrap
+from .web_scrapping import scrap
 
 def get_rid_html_tags(text):
     soup = BeautifulSoup(text, "html.parser")

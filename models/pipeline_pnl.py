@@ -7,7 +7,8 @@ from .sentence_tokenization import tokenize_sentences
 from .word_tokenization import tokenize_words
 
 
-def pipeline_pln(route):
+
+async def pipeline_pln(route):
     # data scraping a
     start_time = time.time() 
     scraped_text = scrap(route)
@@ -32,9 +33,33 @@ def pipeline_pln(route):
     cleaned_tokens = handling_useless_tokens(tokenized_words)
     time_to_clean_tokens = (time.time() - start_time) * 1000
     
-    # replaced abbreviations d]
+    # replaced abbreviations d
     start_time = time.time()
     replace_abbreviations = replace_abbreviations_in_text(cleaned_tokens)
     time_to_clean_tokens = (time.time() - start_time) * 1000
 
     # correct misspelled words e
+
+    data = {
+        'scraping': {
+            'entry': route,
+            'exit': scraped_text,
+            'time': time_to_scrap
+        },
+        'cleaned_word_1': {
+            'entry': time_to_scrap,
+            'exit': cleaned_text,
+            'time': time_to_clean_text
+        },
+        'tokenized_sentences': {
+            'entry': cleaned_text,
+            'exit': tokenized_sentences,
+            'time': time_to_tokenize_sentences
+        },
+        'tokenized_words': {
+            'entry': tokenized_sentences,
+            'exit': tokenized_words,
+            'time': time_to_tokenize_words
+        }
+    }
+    return data
