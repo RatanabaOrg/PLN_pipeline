@@ -1,21 +1,40 @@
+import time
 from .handling_useless_tokens import handling_useless_tokens
 from .replace_abbreviations import replace_abbreviations_in_text
+from .web_scrapping import scrap
+from .cleaning import get_rid_html_tags
+from .sentence_tokenization import tokenize_sentences
+from .word_tokenization import tokenize_words
+
 
 def pipeline_pln(route):
-    print(route)
     # data scraping a
+    start_time = time.time() 
+    scraped_text = scrap(route)
+    time_to_scrap = (time.time() - start_time) * 1000
 
     # cleaned words stiles b
+    start_time = time.time()
+    cleaned_text = get_rid_html_tags(scraped_text)
+    time_to_clean_text = (time.time() - start_time) * 1000
 
     # tokenizing sentences and word tokens c
-    word_tokens_en = ['I\'m', 'heading', 'to', 'the', 'gym', 'ASAP', ',', 'but', 'I\'ll', 'be', 'back', 'before', '5', 'PM', '.', 'FYI', ',', 'I\'ll', 'grab', 'some', 'food', 'on', 'the', 'way']
+    start_time = time.time()
+    tokenized_sentences = tokenize_sentences(cleaned_text)
+    time_to_tokenize_sentences = (time.time() - start_time) * 1000
+
+    start_time = time.time()
+    tokenized_words = tokenize_words(tokenized_sentences)
+    time_to_tokenize_words = (time.time() - start_time) * 1000
 
     # cleaned words b
-    cleaned_words = handling_useless_tokens(word_tokens_en)
-    print(cleaned_words)
-
-    # replaced abbreviations d
-    replace_abbreviations = replace_abbreviations_in_text(cleaned_words)
-    print(replace_abbreviations)
+    start_time = time.time()
+    cleaned_tokens = handling_useless_tokens(tokenized_words)
+    time_to_clean_tokens = (time.time() - start_time) * 1000
+    
+    # replaced abbreviations d]
+    start_time = time.time()
+    replace_abbreviations = replace_abbreviations_in_text(cleaned_tokens)
+    time_to_clean_tokens = (time.time() - start_time) * 1000
 
     # correct misspelled words e
