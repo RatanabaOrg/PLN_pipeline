@@ -8,27 +8,26 @@ from .word_tokenization import tokenize_words
 from .corrector import correct_words
 
 
-
 async def pipeline_pln(route):
-    print("a")
+    # print("a")
     # data scraping a
     start_time = time.time() 
     scraped_text = scrap(route)
     time_to_scrap = (time.time() - start_time) * 1000
 
-    print(scraped_text)
-    print(time_to_scrap)
+    # print(scraped_text)
+    # print(time_to_scrap)
 
-    print("b")
+    # print("b")
     # cleaned words stiles b
     start_time = time.time()
     cleaned_text = get_rid_html_tags(scraped_text)
     time_to_clean_text = (time.time() - start_time) * 1000
 
-    print(cleaned_text)
-    print(time_to_clean_text)
+    # print(cleaned_text)
+    # print(time_to_clean_text)
 
-    print("c")
+    # print("c")
     # tokenizing sentences and word tokens c
     start_time = time.time()
     tokenized_sentences = tokenize_sentences(cleaned_text)
@@ -38,32 +37,44 @@ async def pipeline_pln(route):
     tokenized_words = tokenize_words(tokenized_sentences)
     time_to_tokenize_words = (time.time() - start_time) * 1000
 
-    print("b")
-    # cleaned words b
+    print(tokenized_words)
+    print(time_to_tokenize_words)
+
+    # print("b")
+    # # cleaned words b
     start_time = time.time()
     cleaned_tokens = handling_useless_tokens(tokenized_words)
     time_to_clean_tokens = (time.time() - start_time) * 1000
+
+    print(cleaned_tokens)
+    print(time_to_clean_tokens)
     
-    print("d")
-    # replaced abbreviations d
+    # # print("d")
+    # # replaced abbreviations d
     start_time = time.time()
     replace_abbreviations = replace_abbreviations_in_text(cleaned_tokens)
     time_to_replace_abbreviations = (time.time() - start_time) * 1000
 
-    print("e")
-    # correct misspelled words e
-    start_time = time.time()
-    corrected_words = correct_words(replace_abbreviations)
-    time_to_correct_words = (time.time() - start_time) * 1000
+    print(replace_abbreviations)
+    print(time_to_replace_abbreviations)
+
+    # # print("e")
+    # # correct misspelled words e
+    # start_time = time.time()
+    # corrected_words = correct_words(replace_abbreviations)
+    # time_to_correct_words = (time.time() - start_time) * 1000
+
+    # print(corrected_words)
+    # print(time_to_correct_words)
 
     data = {
-        'scraping': {
-            'entry': route,
-            'exit': scraped_text,
-            'time': time_to_scrap
-        },
+        # 'scraping': {
+        #     'entry': route,
+        #     'exit': scraped_text,
+        #     'time': time_to_scrap
+        # },
         'cleaned_word_1': {
-            'entry': time_to_scrap,
+            'entry': "toxico",
             'exit': cleaned_text,
             'time': time_to_clean_text
         },
@@ -87,12 +98,12 @@ async def pipeline_pln(route):
             'exit': replace_abbreviations,
             'time': time_to_replace_abbreviations
         },
-        'correct_words': {
-            'entry': replace_abbreviations,
-            'exit': corrected_words,
-            'time': time_to_correct_words
-        }
+        # 'correct_words': {
+        #     'entry': replace_abbreviations,
+        #     'exit': corrected_words,
+        #     'time': time_to_correct_words
+        # }
     }
 
-    # print(data)
+    # string_data = str(data)
     return data

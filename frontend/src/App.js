@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import axios from 'axios'; // Import axios
 
 export default function App() {
   const [url, setUrl] = useState('');
@@ -8,23 +9,33 @@ export default function App() {
     e.preventDefault();
 
     if (url === '') {
-      toast.error('Você deve fornecer a url!');
-    } else {
-      toast.success('URL enviada');
-    }
+      toast.error('Você deve fornecer a URL!');
+      return; // Add a return statement to prevent further execution
+    } 
 
-    setUrl('');
+
+    var responde = await axios.post('http://127.0.0.1:5000/process', { route: url }); 
+    var data = responde.data
+    console.log(data);
+    
+    toast.success('URL enviada');
+
+    setUrl(''); // Clear the input field
   }
 
   return (
     <>
       <div className="content">
-
         <div className="container">
-          <form className="forms">
+          <form className="forms" onSubmit={cadastrarUrl}>
             <label>Digite uma URL abaixo:</label>
-            <input type="text" placeholder="URL" value={url} onChange={(e) => setUrl(e.target.value)} />
-            <button className="submit" onClick={cadastrarUrl}>Enviar</button>
+            <input 
+              type="text" 
+              placeholder="URL" 
+              value={url} 
+              onChange={(e) => setUrl(e.target.value)} 
+            />
+            <button className="submit" type="submit">Enviar</button> {/* Changed to type="submit" */}
           </form>
         </div>
 
@@ -46,7 +57,6 @@ export default function App() {
             </tr>
           </tbody>
         </table>
-
       </div>
     </>
   );

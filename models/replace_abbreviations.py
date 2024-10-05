@@ -1,4 +1,4 @@
-def replace_abbreviations_in_text(words):
+def replace_abbreviations_in_text(sentences):
     
     abbreviations = {
         'im': ['i', 'am'],
@@ -40,15 +40,21 @@ def replace_abbreviations_in_text(words):
         'tbd': ['to', 'be', 'determined'],
         'rofl': ['rolling', 'on', 'the', 'floor', 'laughing'],
         'wtf': ['what', 'the', 'heck'],
-        'bff': ['best', 'friends', 'forever']
+        'bff': ['best', 'friends', 'forever'],
+        'ca': ['can'],
+        'nt': ['not'],
+        'gb': ['gigabyte']
     }
 
-    new_words = []  # Use a list to accumulate the new words
+    new_sentences = []  
 
-    for word in words:
-        if word in abbreviations:
-            new_words.extend(abbreviations[word])  # Extend the new_words list with the expansion
-        else:
-            new_words.append(word)  # Keep the original word if it's not an abbreviation
+    for sentence in sentences:
+        new_words = []
+        for word in sentence:
+            if word in abbreviations:
+                new_words.extend(abbreviations[word])  
+            else:
+                new_words.append(word)  
+        new_sentences.append(new_words)
 
-    return new_words
+    return new_sentences
