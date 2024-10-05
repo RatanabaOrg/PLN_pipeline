@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font: 14px 'Roboto', sans-serif;
+  background-color: #EFEFEF;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus{
+  outline: 0;
+}
+
+html, body, #root{
+  height: 100%;
+}
+
+a{
+  text-decoration: none;
+}
+
+ul{
+  list-style: none;
+}
+
+button{
+ cursor: pointer; 
+}
+
+/* -------------------------- */
+
+.content {
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin-bottom: 3em;
+}
+
+.container .forms {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.forms label {
+  margin-bottom: 0.5em;
+  font-size: 1.4em;
+}
+
+.forms input {
+  margin-bottom: 1em;
+  padding: 0.7em;
+  border: none;
+  border-radius: 5px;
+  max-width: 400px;
+  border: 1px solid #48AFFA;
+  background-color: #fff;
+}
+
+.forms input:hover {
+  box-shadow: 1px 1px 3px #0A8FEF;
+}
+
+::-webkit-input-placeholder {
+  color:black;
+}
+
+.submit {
+  height: 35px;
+  border: 0;
+  border-radius: 7px;
+  background-color: #48AFFA;
+  color: #fff;
+  font-size: 1.3em;
+  max-width: 200px;
+}
+
+.submit:hover {
+  background-color: #0A8FEF;
+  box-shadow: 1px 2px 5px #002846;
+}
+
+p{
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+}
+
+/* -------------------------- */
+
+table{
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: 15px;
+}
+
+table caption{
+  font-size: 1.5em;
+  margin: 5em 0 0.75em;
+}
+
+table tr{
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th, 
+table td{
+  padding: 0.62em;
+  text-align: center;
+}
+
+table th{
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #002846;
+  background-color: #48b0fa30;
+}
+
+table td .action{
+  border: 0;
+  padding: 5px;
+  margin-right: 2px;
+  align-items: center;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+table td .action svg{
+  vertical-align: middle;
+}
+
+table td .badge{
+  padding: 3px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  table{
+      border: 0;
+  }
+
+  table caption{
+      font-size: 1.3em;
+  }
+
+  table thead{
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+  }
+
+  table tr{
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: 0.65em;
+  }
+
+  table td{
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: 0.8em;
+      text-align: right;
+  }
+
+  table td::before{
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+  }
+
+  table td:last-child{
+      border-bottom: 0;
+  }
+}
