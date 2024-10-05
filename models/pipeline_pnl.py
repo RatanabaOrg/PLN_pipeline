@@ -15,6 +15,9 @@ async def pipeline_pln(route):
     scraped_text = scrap(route)
     time_to_scrap = (time.time() - start_time) * 1000
 
+    scraped_text_view = f'{scraped_text[:10]}... ...{scraped_text[-10:]} '
+    print(scraped_text_view)
+
     # print(scraped_text)
     # print(time_to_scrap)
 
@@ -58,23 +61,23 @@ async def pipeline_pln(route):
     print(replace_abbreviations)
     print(time_to_replace_abbreviations)
 
-    # # print("e")
-    # # correct misspelled words e
-    # start_time = time.time()
-    # corrected_words = correct_words(replace_abbreviations)
-    # time_to_correct_words = (time.time() - start_time) * 1000
+    # print("e")
+    # correct misspelled words e
+    start_time = time.time()
+    corrected_words = correct_words(replace_abbreviations)
+    time_to_correct_words = (time.time() - start_time) * 1000
 
-    # print(corrected_words)
-    # print(time_to_correct_words)
+    print(corrected_words)
+    print(time_to_correct_words)
 
     data = {
-        # 'scraping': {
-        #     'entry': route,
-        #     'exit': scraped_text,
-        #     'time': time_to_scrap
-        # },
+        'scraping': {
+            'entry': route,
+            'exit': scraped_text_view,
+            'time': time_to_scrap
+        },
         'cleaned_word_1': {
-            'entry': "toxico",
+            'entry': scraped_text_view,
             'exit': cleaned_text,
             'time': time_to_clean_text
         },
@@ -98,11 +101,11 @@ async def pipeline_pln(route):
             'exit': replace_abbreviations,
             'time': time_to_replace_abbreviations
         },
-        # 'correct_words': {
-        #     'entry': replace_abbreviations,
-        #     'exit': corrected_words,
-        #     'time': time_to_correct_words
-        # }
+        'correct_words': {
+            'entry': replace_abbreviations,
+            'exit': corrected_words,
+            'time': time_to_correct_words
+        }
     }
 
     # string_data = str(data)
