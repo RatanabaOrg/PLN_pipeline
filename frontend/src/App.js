@@ -1,28 +1,32 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import axios from 'axios'; // Import axios
+import axios from 'axios';
 
 export default function App() {
   const [url, setUrl] = useState('');
-  const [data, setData] = useState(null); // Initialize data as null
+  const [data, setData] = useState(null);
 
   async function cadastrarUrl(e) {
     e.preventDefault();
 
     if (url === '') {
       toast.error('Você deve fornecer a URL!');
-      return; // Add a return statement to prevent further execution
+      return;
     }
+
+    setData(null); // Limpa os dados antigos
 
     try {
       const response = await axios.post('http://127.0.0.1:5000/process', { route: url });
-      setData(response.data); // Set the received data
+      setData(response.data); // Armazena os dados recebidos
+      console.log(response.data);
+
       toast.success('URL enviada');
     } catch (error) {
       toast.error('Erro ao enviar URL!');
-      console.error('Error:', error); // Log error for debugging
+      console.error('Error:', error);
     } finally {
-      setUrl(''); // Clear the input field
+      setUrl(''); // Limpa o campo de entrada
     }
   }
 
@@ -63,7 +67,7 @@ export default function App() {
             {data && data.cleaned_word_1 && (
               <tr>
                 <td data-label="Entrada">{data.cleaned_word_1.entry}</td>
-                <td data-label="Saída">{data.cleaned_word_1.exit}</td>
+                <td data-label="Saída">{JSON.stringify(data.cleaned_word_1.exit, null, 2)}</td>
                 <td data-label="Etapa">Remoção de Ruído</td>
                 <td data-label="Tempo">{data.cleaned_word_1.time}</td>
               </tr>
@@ -71,39 +75,57 @@ export default function App() {
             {data && data.tokenized_sentences && (
               <tr>
                 <td data-label="Entrada">{data.tokenized_sentences.entry}</td>
-                <td data-label="Saída">{data.tokenized_sentences.exit}</td>
+                <td data-label="Saída">
+                  <pre>{JSON.stringify(data.tokenized_sentences.exit.map(sentence => sentence.split(" ")), null, 2)}</pre>
+                </td>
                 <td data-label="Etapa">Tokenização de Frases</td>
                 <td data-label="Tempo">{data.tokenized_sentences.time}</td>
               </tr>
             )}
             {data && data.tokenized_words && (
               <tr>
-                <td data-label="Entrada">{data.tokenized_words.entry}</td>
-                <td data-label="Saída">{data.tokenized_words.exit}</td>
+                <td data-label="Entrada">
+                <pre>{JSON.stringify(data.tokenized_sentences.exit.map(sentence => sentence.split(" ")), null, 2)}</pre>
+                </td>
+                <td data-label="Saída">
+                  <pre>{JSON.stringify(data.tokenized_words.exit, null, 2)}</pre>
+                </td>
                 <td data-label="Etapa">Tokenização de Palavras</td>
                 <td data-label="Tempo">{data.tokenized_words.time}</td>
               </tr>
             )}
             {data && data.cleaned_word_2 && (
               <tr>
-                <td data-label="Entrada">{data.cleaned_word_2.entry}</td>
-                <td data-label="Saída">{data.cleaned_word_2.exit}</td>
-                <td data-label="Etapa">Limpeza de Tokense e Conversão para Minúsculos</td>
+                <td data-label="Entrada">
+                  <pre>{JSON.stringify(data.cleaned_word_2.entry, null, 2)}</pre>
+                </td>
+                <td data-label="Saída">
+                  <pre>{JSON.stringify(data.cleaned_word_2.exit, null, 2)}</pre>
+                </td>
+                <td data-label="Etapa">Limpeza de Tokens e Conversão para Minúsculos</td>
                 <td data-label="Tempo">{data.cleaned_word_2.time}</td>
               </tr>
             )}
             {data && data.replaced_abbreviations && (
               <tr>
-                <td data-label="Entrada">{data.replaced_abbreviations.entry}</td>
-                <td data-label="Saída">{data.replaced_abbreviations.exit}</td>
+                <td data-label="Entrada">
+                  <pre>{JSON.stringify(data.replaced_abbreviations.entry, null, 2)}</pre>
+                </td>
+                <td data-label="Saída">
+                  <pre>{JSON.stringify(data.replaced_abbreviations.exit, null, 2)}</pre>
+                </td>
                 <td data-label="Etapa">Substituição de Abreviações</td>
                 <td data-label="Tempo">{data.replaced_abbreviations.time}</td>
               </tr>
             )}
             {data && data.correct_words && (
               <tr>
-                <td data-label="Entrada">{data.correct_words.entry}</td>
-                <td data-label="Saída">{data.correct_words.exit}</td>
+                <td data-label="Entrada">
+                  <pre>{JSON.stringify(data.correct_words.entry, null, 2)}</pre>
+                </td>
+                <td data-label="Saída">
+                  <pre>{JSON.stringify(data.correct_words.exit, null, 2)}</pre>
+                </td>
                 <td data-label="Etapa">Correção de Caracteres Incorretos</td>
                 <td data-label="Tempo">{data.correct_words.time}</td>
               </tr>
