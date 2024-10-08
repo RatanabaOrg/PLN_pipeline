@@ -25,10 +25,15 @@ necessários para se executar tais etapas.
 
 | Entrada | Saída | Etapa | Tempo  |
 | ------- | ----- | ----- | ------ |
-| `http://teste.com.br`                                                                     | `"<html>...textos</html>"`                                                                   | Raspagem                       | 5ms    |
-| `"<html>...textos</html>"`                                                                | `"Produto interessantee. Gostei bastante. Mt!"`                                               | Remoção de ruído                | 1ms    |
-| `"Produto interessantee. Gostei bastante. Mt!"`                                           | `['Produto interessantee.', 'Gostei bastante.', 'Mt!']`                                       | Tokenização por frases          | 2ms    |
-| `['Produto interessantee.', 'Gostei bastante.', 'Mt!']`                                   | `[['Produto', 'interessantee'], ['Gostei', 'bastante'], ['Mt']]`                              | Tokenização por palavras        | 2.5ms  |
-| `[['Produto', 'interessantee'], ['Gostei', 'bastante'], ['Mt']]`                          | `[['Produto', 'interessantee'], ['Gostei', 'bastante'], ['Muito']]`                           | Expansão de siglas e abreviaturas| 1ms    |
-| `[['Produto', 'interessantee'], ['Gostei', 'bastante'], ['Muito']]`                       | `[['produto', 'interessantee'], ['gostei', 'bastante'], ['muito']]`                           | Conversão para minúsculas       | 3ms    |
-| `[['produto', 'interessantee'], ['gostei', 'bastante'], ['muito']]`                       | `[['produto', 'interessante'], ['gostei', 'bastante'], ['muito']]`                            | Correção de caracteres incorretos| 2.3ms  |
+| `http://teste.com.br`                                                   | `"<html>...textos</html>"`                                              | Raspagem                          | 5ms    |
+| `"<html>...textos</html>"`                                              | `"Produto interessantee. Gostei bastante. Mt!"`                         | Remoção de ruído                  | 1ms    |
+| `"Produto interessantee. Gostei bastante. Mt!"`                         | `['Produto interessantee.', 'Gostei bastante.', 'Mt!']`                 | Tokenização por frases            | 2ms    |
+| `['Produto interessantee.', 'Gostei bastante.', 'Mt!']`                 | `[['Produto', 'interessantee'], ['Gostei', 'bastante'], ['Mt']]`        | Tokenização por palavras          | 2.5ms  |
+| `[['Produto', 'interessantee'], ['Gostei', 'bastante'], ['Mt']]`        | `[['Produto', 'interessantee'], ['Gostei', 'bastante'], ['Muito']]`     | Expansão de siglas e abreviaturas | 1ms    |
+| `[['Produto', 'interessantee'], ['Gostei', 'bastante'], ['Muito']]`     | `[['produto', 'interessantee'], ['gostei', 'bastante'], ['muito']]`     | Conversão para minúsculas         | 3ms    |
+| `[['produto', 'interessantee'], ['gostei', 'bastante'], ['muito']]`     | `[['produto', 'interessante'], ['gostei', 'bastante'], ['muito']]`      | Correção de caracteres incorretos | 2.3ms  |
+
+Participantes: 
+- Amanda Vieira de Oliveira,
+- Carlos Eduardo Falandes,
+- Lucas França Registro.
